@@ -1,0 +1,25 @@
+<div class="max-w-2hl container mx-auto pt-5">
+  <h1 class="font-bold mb-2 text-center text-lg">{{title | titlecase}}</h1>
+  <!--  <app-product [product]="products[0]"></app-product>-->
+  <!--  <app-product [product]="products[1]"></app-product>-->
+  <p *ngIf="loading" class="text-center text-lg">Loading...</p>
+
+  <div class="grid-x">
+    <div class="product cell small-12 large-4" (click)="showI(product.id)"
+         *ngFor="let product of products.slice(0, limitStart);  index as i">
+
+      <app-product [product]="product"></app-product>
+
+    </div>
+
+  </div>
+
+  <div class="load-more">
+    <button *ngIf="products.length !== limitStart"
+            class="border load-more-button py-2 px-4 rounded text-center"
+            (click)="limitStart = limitStart + limitStartPlus"
+    > load More
+    </button>
+
+  </div>
+</div>
