@@ -13,6 +13,8 @@ import {ProductComponent} from "./common-components/product/product.component";
 import {HttpClientModule} from "@angular/common/http";
 import {P404PageComponent} from './pages/p404/p404.component';
 import {SingleProductComponent} from './pages/single-product/single-product.component';
+import {DirectivesModule} from "./core/directives/directives.module";
+import {PipesModule} from "./core/pipes/pipes.module";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import {SingleProductComponent} from './pages/single-product/single-product.comp
     MatMenuModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    DirectivesModule,
+    PipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

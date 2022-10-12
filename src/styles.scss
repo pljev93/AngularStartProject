@@ -16,14 +16,30 @@ button {
     max-width: 95%;
   }
 }
+.product-all {
+
+    @media (min-width: 1024px){
+      margin: 0 -15px;
+    }
+
+}
 .product {
 cursor: pointer;
+  padding: 15px 0;
+  @media (min-width: 1024px){
+    height: 100%;
+  }
+
   &__detail {
     text-align: center;
-   height: 100%;
+    margin: 15px;
+    padding: 50px 15px;
     display: flex;
     flex-direction: column;
+    @media (min-width: 1024px){
+    height: 100%;
 
+    }
     img {
       width: 150px;
       height: 300px;

@@ -37,6 +37,7 @@ export class ProductPageComponent implements OnInit {
     this.productsService.getAll().subscribe(products => {
       this.products = products;
       this.loading = false
+
     })
   }
 
