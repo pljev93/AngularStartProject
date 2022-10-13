@@ -9,13 +9,16 @@ import {NavigationComponent} from './common-components/navigation/navigation.com
 import {HomePageComponent} from './pages/home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
 import {ProductComponent} from "./common-components/product/product.component";
 import {HttpClientModule} from "@angular/common/http";
 import {P404PageComponent} from './pages/p404/p404.component';
 import {SingleProductComponent} from './pages/single-product/single-product.component';
 import {DirectivesModule} from "./core/directives/directives.module";
 import {PipesModule} from "./core/pipes/pipes.module";
-
+import {MatSelectModule} from "@angular/material/select";
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,11 +35,15 @@ import {PipesModule} from "./core/pipes/pipes.module";
     AppRoutingModule,
     BrowserAnimationsModule,
     MatMenuModule,
+    MatFormFieldModule,
+    MatButtonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     DirectivesModule,
-    PipesModule
+    PipesModule,
+    MatSelectModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

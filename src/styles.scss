@@ -40,6 +40,11 @@ cursor: pointer;
     height: 100%;
 
     }
+    h2 {
+      &:hover {
+        color: blue;
+      }
+    }
     img {
       width: 150px;
       height: 300px;
@@ -74,4 +79,10 @@ cursor: pointer;
      color: white;
    }
  }
+}
+.mat-form-field-label , .mat-select-min-line {
+  color: black;
+}
+.mat-select-arrow {
+  color: black;
 }

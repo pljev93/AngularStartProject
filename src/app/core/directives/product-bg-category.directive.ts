@@ -1,4 +1,4 @@
-import {Directive, HostBinding, HostListener, Input} from '@angular/core';
+import {Directive, HostBinding, Input} from '@angular/core';
 
 @Directive({
   selector: '[addProductBgCategory]'
@@ -8,13 +8,7 @@ export class ProductBgCategoryDirective {
   @HostBinding('style.background-color') public background: string;
   @HostBinding('style.opacity') public opacity: string;
 
-  @HostListener('mouseenter') onMouseIn() {
-    this.opacity = '0.6';
-  }
 
-  @HostListener('mouseleave') onMouseOut() {
-    this.opacity = '1';
-  }
 
   ngOnInit() {
 
