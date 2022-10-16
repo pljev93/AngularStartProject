@@ -5,7 +5,8 @@ import {ProductBgCategoryDirective} from "./product-bg-category.directive";
 @NgModule({
 
   declarations: [
-    ProductBgCategoryDirective
+    ProductBgCategoryDirective,
+
   ],
   exports: [
     ProductBgCategoryDirective,

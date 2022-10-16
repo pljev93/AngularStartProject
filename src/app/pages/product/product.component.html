@@ -4,12 +4,19 @@
   <!--  <app-product [product]="products[1]"></app-product>-->
   <p *ngIf="loading" class="text-center text-lg">Loading...</p>
 
+  <button  (click)="AscDesc = !AscDesc" (click)="sort(AscDesc)"
+    class="button"
+
+
+
+
+  > {{AscDesc ? 'Desc':'Asc'}}</button>
 
   <div class="grid-x">
     <div class="large-8">
       <mat-form-field appearance="fill">
         <mat-label>Select an option</mat-label>
-        <mat-select [(value)]="selected" (valueChange)="getProducts(search)">
+        <mat-select [(value)]="selected" (valueChange)="getProducts(search , AscDesc)">
           <mat-option [value]="'all'">Select an option</mat-option>
           <mat-option *ngFor="let category of categories;"  [value]="category">{{category}}</mat-option>
         </mat-select>
@@ -32,7 +39,9 @@
     <div class="grid-x">
 
       <div  class="cell small-12 large-4"
-            *ngFor="let product of products | slice: 0:limitStart;  index as i ">
+            *ngFor="let product of products | slice: 0:limitStart;  index as i "
+
+      >
         <div  class="product">
           <app-product @animationProducts [product]="product"></app-product>
         </div>
