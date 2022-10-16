@@ -5,14 +5,27 @@
   <p *ngIf="loading" class="text-center text-lg">Loading...</p>
 
 
-  <mat-form-field appearance="fill">
-    <mat-label>Select an option</mat-label>
-    <mat-select [(value)]="selected" (valueChange)="getProducts()">
-      <mat-option [value]="'all'">Select an option</mat-option>
-      <mat-option *ngFor="let category of categories;"  [value]="category">{{category}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <p>You selected: {{selected}}</p>
+  <div class="grid-x">
+    <div class="large-8">
+      <mat-form-field appearance="fill">
+        <mat-label>Select an option</mat-label>
+        <mat-select [(value)]="selected" (valueChange)="getProducts(search)">
+          <mat-option [value]="'all'">Select an option</mat-option>
+          <mat-option *ngFor="let category of categories;"  [value]="category">{{category}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p>You selected: {{selected}}</p>
+
+
+    </div>
+    <div class="large-4">
+      <form class="example-form">
+        <input id="search" type="text"  placeholder="Search" name= "search" [(ngModel)]= "search" (keyup)="modelChange(search)">
+      </form>
+      {{search}}
+    </div>
+  </div>
+
   <p>{{products.length}}</p>
   <p>{{limitStart}}</p>
   <div class="product-all">
@@ -27,6 +40,7 @@
     </div>
   </div>
   <div class="load-more">
+    <p *ngIf="products.length == 0 "> No Result</p>
     <button *ngIf="products.length  > limitStart"
             class="border load-more-button  py-2 px-4 rounded text-center"
             (click)="limitStart = limitStart + limitStartPlus"
@@ -34,3 +48,4 @@
     </button>
   </div>
 </div>
+

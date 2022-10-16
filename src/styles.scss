@@ -23,6 +23,12 @@ button {
     }
 
 }
+input {
+  color: red!important;
+  &::placeholder {
+    color: greenyellow!important;
+  }
+}
 .product {
 cursor: pointer;
   padding: 15px 0;

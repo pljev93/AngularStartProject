@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {IProduct} from "../../core/interfaces/product";
 import {products as data} from "../../core/data/product";
 import {ProductsService} from "../../core/services/products.services";
-import {Router} from '@angular/router';
 import {animate, style, transition, trigger} from "@angular/animations";
+import {debounceTime,  Subject} from "rxjs";
 
 @Component({
   selector: 'app-product-page',
@@ -23,6 +23,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
 })
 
 export class ProductPageComponent implements OnInit {
+
   value: string
   title = 'Product Page'
   limitStart = 3
@@ -36,27 +37,47 @@ export class ProductPageComponent implements OnInit {
   categories: string
   selected: 'all'
   show: 'all'
-
-  constructor(private productsService: ProductsService, public router: Router) {
+  search: string
+  searchStr: string = "";
+  private searchSubject = new Subject<string>()
+  constructor(private productsService: ProductsService) {
   }
 
   ngOnInit(): void {
     this.loading = true
-    this.getProducts();
-    this.getCat();
-
+    this.getProducts(this.searchStr);
+    this.getCat()
+    this.searchSubject.pipe(debounceTime(1000)).subscribe((searchText) => {
+      this.getProducts(searchText);
+    })
   }
 
-  showI(id: number) {
-    this.router.navigate(['product', id]);
-
+   modelChange(str: string): void {
+     this.searchStr = str
+     this.searchSubject.next(str)
   }
 
-  getProducts(): void {
+  getProducts(searchText:string): void {
     this.productsService.getAll(this.selected == undefined ? 'all':this.selected).subscribe(products => {
       this.products = products;
       this.loading = false
       this.limitStart = 3
+
+      if(!searchText){
+        return this.products;
+      }
+
+      var result: IProduct[] = [];
+
+      searchText = searchText.toLowerCase();
+
+      this.products.forEach(function(products) {
+        if(products.title.toLowerCase().indexOf(searchText) !== -1){
+          result.push(products);
+        }
+      });
+      return this.products = result;
+
     })
   }
   getCat(): void {

@@ -18,7 +18,10 @@ import {SingleProductComponent} from './pages/single-product/single-product.comp
 import {DirectivesModule} from "./core/directives/directives.module";
 import {PipesModule} from "./core/pipes/pipes.module";
 import {MatSelectModule} from "@angular/material/select";
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from "@angular/material/input";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomePageComponent,
     ProductComponent,
     P404PageComponent,
-    SingleProductComponent
+    SingleProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     PipesModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatIconModule,
+    FormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
