@@ -3,14 +3,14 @@
   <h1 class="font-bold">Angular Logo</h1>
 
 
-  <div class="burger-menu" mat-button [matMenuTriggerFor]="menu">
+  <div class="burger-menu"  [matMenuTriggerFor]="menu">
     <span></span>
     <span></span>
     <span></span>
   </div>
   <mat-menu #menu="matMenu">
     <a routerLink="/" mat-menu-item>Home</a>
-    <a routerLink="/product" mat-menu-item>Product</a>
+    <a routerLink="/products" mat-menu-item>Products</a>
     <a routerLink="/about" mat-menu-item>About</a>
   </mat-menu>
 </nav>

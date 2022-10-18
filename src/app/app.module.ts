@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {ProductPageComponent} from './pages/product/product.component';
+import {ProductsPageComponent} from './pages/products/products.component';
 import {AboutComponent} from './pages/about/about.component';
 import {NavigationComponent} from './common-components/navigation/navigation.component';
 import {HomePageComponent} from './pages/home/home.component';
@@ -26,7 +26,7 @@ import {MatSortModule} from "@angular/material/sort";
 @NgModule({
   declarations: [
     AppComponent,
-    ProductPageComponent,
+    ProductsPageComponent,
     AboutComponent,
     NavigationComponent,
     HomePageComponent,
