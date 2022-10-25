@@ -11,22 +11,15 @@ export class ProductsService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(show: string): Observable<IProduct[]> {
-    switch (show) {
-      case 'all':
+  getProductsApi(): Observable<IProduct[]> {
         return this.http.get<IProduct[]>(`${environment.apiUrl}/products`)
-
-      default:
-        return this.http.get<IProduct[]>(`${environment.apiUrl}/products/category/${show}`)
-
-    }
   }
 
-  getProductDetails(id: number): Observable<string> {
-    return this.http.get<any>(`${environment.apiUrl}/products/${id}`)
+  getProductDetailsApi(id: number): Observable<IProduct[]> {
+    return this.http.get<IProduct[]>(`${environment.apiUrl}/products/${id}`)
   }
 
-  getCategories(): Observable<string> {
-    return this.http.get<any>(`${environment.apiUrl}/products/categories`)
+  getCategoriesApi(): Observable<string> {
+    return this.http.get<string>(`${environment.apiUrl}/products/categories`)
   }
 }

@@ -2,44 +2,45 @@
   <h1 class="font-bold mb-2 text-center text-lg">{{title | titlecase}}</h1>
   <!--  <app-product [product]="products[0]"></app-product>-->
   <!--  <app-product [product]="products[1]"></app-product>-->
-  <p *ngIf="loading" class="text-center text-lg">Loading...</p>
 
-  <button   (click)="sort(AscDesc)"
+
+  <button   (click)="sort(sortProductsAscDesc)"
             class="button"
 
 
 
 
-  > {{AscDesc ? 'Desc':'Asc'}}</button>
+  > {{sortProductsAscDesc ? 'Desc':'Asc'}}</button>
 
   <div class="grid-x">
     <div class="large-8">
       <mat-form-field appearance="fill">
         <mat-label>Select an option</mat-label>
-        <mat-select [(value)]="selected" (valueChange)="getProducts(search , AscDesc)">
+        <mat-select [(value)]="valueSelectedPageProducts" (valueChange)="getProducts(searchProducts , sortProductsAscDesc)">
           <mat-option [value]="'all'">Select an option</mat-option>
-          <mat-option *ngFor="let category of categories;"  [value]="category">{{category}}</mat-option>
+          <mat-option *ngFor="let category of categoriesProducts;"  [value]="category">{{category}}</mat-option>
         </mat-select>
       </mat-form-field>
-      <p>You selected: {{selected}}</p>
+      <p>You selected: {{valueSelectedPageProducts}}</p>
 
 
     </div>
     <div class="large-4">
       <form class="example-form">
-        <input id="search" type="text"  placeholder="Search" name= "search" [(ngModel)]= "search" (keyup)="modelChange(search)">
+        <input id="search" type="text"  placeholder="Search" name= "search" [(ngModel)]= "searchProducts" (keyup)="getStrSearchProducts(searchProducts)">
       </form>
-      {{search}}
+      {{searchProducts}}
     </div>
   </div>
 
   <p>{{products.length}}</p>
-  <p>{{limitStart}}</p>
+  <p>{{numberShowedProducts}}</p>
+  <div *ngIf="loadingProducts"><mat-spinner></mat-spinner></div>
   <div class="product-all">
     <div class="grid-x">
 
       <div  class="cell small-12 large-4"
-            *ngFor="let product of products | slice: 0:limitStart;  index as i "
+            *ngFor="let product of products | slice: 0:numberShowedProducts;  index as i "
 
       >
         <div  class="product">
@@ -50,9 +51,9 @@
   </div>
   <div class="load-more">
     <p *ngIf="products.length == 0 "> No Result</p>
-    <button *ngIf="products.length  > limitStart"
+    <button *ngIf="products.length  > numberShowedProducts"
             class="border load-more-button  py-2 px-4 rounded text-center"
-            (click)="limitStart = limitStart + limitStartPlus"
+            (click)="numberShowedProducts = numberShowedProducts + numberAddShowedProducts"
     > load More
     </button>
   </div>

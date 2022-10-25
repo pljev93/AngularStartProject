@@ -10,10 +10,10 @@ import {Router} from "@angular/router";
 export class ProductComponent  {
 
   @Input() product : IProduct;
-  details = false;
+  detailsProducts = false;
   constructor( public router: Router) {
   }
-  showI(id: number) {
+  showSinglePageProduct(id: number) {
     this.router.navigate(['product', id]);
 
   }

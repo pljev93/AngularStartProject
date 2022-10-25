@@ -23,54 +23,56 @@ import {debounceTime,  Subject} from "rxjs";
 })
 
 export class ProductsPageComponent implements OnInit {
+  title = 'Products Page';
+  productsPlus: IProduct[] = data;
+  products: IProduct[] = [];
+  product: object;
+  numberShowedProducts = 3;
+  numberAddShowedProducts = 3;
+  sortProductsAscDesc = true;
+  loadingProducts = false;
+  categoriesProducts: string;
+  valueSelectedPageProducts: string;
+  searchProducts: string;
+  strSearchProducts: string = "";
+  private subjectSearchProducts = new Subject<string>();
 
-  value: string
-  title = 'Products Page'
-  limitStart = 3
-  limitStartPlus = 3
-  details = false
-  AscDesc = true
-  productsPlus: IProduct[] = data
-  products: IProduct[] = []
-  loading = false
-  product: object
-  post: object
-  categories: string
-  selected: 'all'
-  show: 'all'
-  search: string
-  searchStr: string = "";
-  private searchSubject = new Subject<string>()
-  sortedData: IProduct[]
   constructor(private productsService: ProductsService) {
-    this.sortedData = this.products.slice();
   }
 
   ngOnInit(): void {
-    this.loading = true
-    this.getProducts(this.searchStr , this.AscDesc);
-    this.getCat()
-    this.searchSubject.pipe(debounceTime(1000)).subscribe((searchText) => {
-      this.getProducts(searchText, this.AscDesc);
+    this.getProducts(this.strSearchProducts , this.sortProductsAscDesc);
+    this.getTitleCategories();
+    this.subjectSearchProducts.pipe(debounceTime(1000)).subscribe((searchText) => {
+      this.getProducts(searchText, this.sortProductsAscDesc);
     })
+    this.loadingProducts = true;
   }
 
-  sort(AscDesc: boolean): void {
-    this.getProducts(this.searchStr , AscDesc);
+  sort(sortProductsAscDesc: boolean): void {
+    this.getProducts(this.strSearchProducts , sortProductsAscDesc);
   }
-  modelChange(str: string): void {
-    this.searchStr = str
-    this.searchSubject.next(str)
+  getStrSearchProducts(str: string): void {
+    this.strSearchProducts = str;
+    this.subjectSearchProducts.next(str);
   }
 
-  getProducts(searchText:string , AscDesc: boolean): void {
-    this.productsService.getAll(this.selected == undefined ? 'all':this.selected).subscribe(products => {
+  getProducts(searchText:string , sortProductsAscDesc: boolean): void {
+    this.productsService.getProductsApi().subscribe(products => {
+
       this.products = products;
-      this.loading = false
-      this.limitStart = 3
-      this.AscDesc = !this.AscDesc
+      if (this.valueSelectedPageProducts && this.valueSelectedPageProducts !== 'all') {
+        for (let i = this.products.length; i--; ) {
+          if (  this.products[i].category !== this.valueSelectedPageProducts) {
+            this.products.splice(i, 1);
+          }
+        }
+      }
+      this.loadingProducts = false;
+      this.numberShowedProducts = 3;
+      this.sortProductsAscDesc = !this.sortProductsAscDesc;
       this.products = this.products.slice().sort((a, b) => {
-        return compare(a.title, b.title, AscDesc);
+        return compare(a.title, b.title, sortProductsAscDesc);
       });
 
       if(!searchText){
@@ -90,9 +92,9 @@ export class ProductsPageComponent implements OnInit {
 
     })
   }
-  getCat(): void {
-    this.productsService.getCategories().subscribe(categories => {
-      this.categories = categories;
+  getTitleCategories(): void {
+    this.productsService.getCategoriesApi().subscribe(categories => {
+      this.categoriesProducts = categories;
 
     })
   }

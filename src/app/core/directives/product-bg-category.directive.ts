@@ -11,7 +11,6 @@ export class ProductBgCategoryDirective {
 
 
   ngOnInit() {
-
     this.addBg(this.category);
   }
 
@@ -20,20 +19,18 @@ export class ProductBgCategoryDirective {
     switch (category) {
       case 'men\'sclothing':
         this.background = '#FFA07A';
-
         break;
       case 'jewelery':
-        this.background = '#00FF00'
+        this.background = '#00FF00';
         break;
       case 'electronics':
-        this.background = '#008B8B'
+        this.background = '#008B8B';
         break;
       case 'women\'sclothing':
-        this.background = '#00FFFF'
+        this.background = '#00FFFF';
         break;
-
       default:
-        this.background = '#C0C0C0'
+        this.background = '#C0C0C0';
         break;
     }
   }

@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IProduct} from './core/interfaces/product';
-import {products as data} from './core/data/product'
-import {ProductsService} from "./core/services/products.services";
+
 
 @Component({
   selector: 'app-root',
@@ -9,7 +7,7 @@ import {ProductsService} from "./core/services/products.services";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'AngularStart'
+  title = 'AngularStart';
 
 
   ngOnInit(): void {
