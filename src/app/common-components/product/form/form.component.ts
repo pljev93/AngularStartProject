@@ -10,16 +10,17 @@ import {IProduct} from "../../../core/interfaces/product";
 export class FormComponent implements OnInit {
   title:string = 'Form';
   products: IProduct;
-  product : IProduct[];
+  product : boolean | IProduct;
   constructor(private productsService: ProductsService) {
+    this.product = productsService.isProdId$.value
 
   }
 
   ngOnInit(): void {
-    this.productsService.getProductDetailsApi(20).subscribe((data) => {
-      this.product = data;
+    // this.productsService.getProductDetailsApi(20).subscribe((data) => {
+    //   this.product = data;
       console.log(this.product)
-    });
+    // });
   }
   // getafafadsf(): void {
   //   console.log(this.productsService.getProductsEdit())

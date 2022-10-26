@@ -28,7 +28,7 @@ export class ProductsService {
 
    // return   this.isProdId$ = id;
     console.log(id)
-    this.isProdId$.next(id)
+   return  this.isProdId$.next(id)
 
   }
 
