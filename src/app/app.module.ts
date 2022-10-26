@@ -11,7 +11,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
-import {ProductComponent} from "./common-components/product/product.component";
+import {DialogContentExampleDialog, ProductComponent} from "./common-components/product/product.component";
 import {HttpClientModule} from "@angular/common/http";
 import {P404PageComponent} from './pages/p404/p404.component';
 import {SingleProductComponent} from './pages/single-product/single-product.component';
@@ -23,6 +23,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from "@angular/material/input";
 import {MatSortModule} from "@angular/material/sort";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {FormComponent} from "./common-components/product/form/form.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ProductComponent,
     P404PageComponent,
     SingleProductComponent,
+    FormComponent,
+    DialogContentExampleDialog
   ],
   imports: [
     BrowserModule,

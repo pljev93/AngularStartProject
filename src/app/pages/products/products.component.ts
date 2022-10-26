@@ -42,7 +42,7 @@ export class ProductsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts(this.strSearchProducts , this.sortProductsAscDesc);
-    this.getTitleCategories();
+    this.getCategoriesProducts();
     this.subjectSearchProducts.pipe(debounceTime(1000)).subscribe((searchText) => {
       this.getProducts(searchText, this.sortProductsAscDesc);
     })
@@ -92,7 +92,7 @@ export class ProductsPageComponent implements OnInit {
 
     })
   }
-  getTitleCategories(): void {
+  getCategoriesProducts(): void {
     this.productsService.getCategoriesApi().subscribe(categories => {
       this.categoriesProducts = categories;
 

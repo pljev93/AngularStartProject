@@ -11,10 +11,15 @@ export class ProductComponent  {
 
   @Input() product : IProduct;
   detailsProducts = false;
+  idProduct: number | string;
   constructor( public router: Router) {
   }
   showSinglePageProduct(id: number) {
     this.router.navigate(['product', id]);
+
+  }
+  getProductId(id: number) {
+    this.idProduct = id
 
   }
 }
