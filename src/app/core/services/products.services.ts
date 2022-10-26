@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {IProduct} from "../interfaces/product";
 import {environment} from '../../../environments/environment';
 
@@ -22,4 +22,15 @@ export class ProductsService {
   getCategoriesApi(): Observable<string> {
     return this.http.get<string>(`${environment.apiUrl}/products/categories`)
   }
+  isProdId$ = new BehaviorSubject<boolean | IProduct>(false)
+
+  getProductEdit(id: IProduct) {
+
+   // return   this.isProdId$ = id;
+    console.log(id)
+    this.isProdId$.next(id)
+
+  }
+
+
 }

@@ -9,9 +9,11 @@ import {removeSpaces} from './remove-spaces.pipe';
     removeSpaces,
 
 
+
   ],
   exports: [
     removeSpaces,
+
 
   ]
 })

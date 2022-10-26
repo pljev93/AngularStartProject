@@ -4,6 +4,7 @@ import {products as data} from "../../core/data/product";
 import {ProductsService} from "../../core/services/products.services";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {debounceTime,  Subject} from "rxjs";
+import {ModalService} from "../../core/services/modal.service";
 
 @Component({
   selector: 'app-product-page',
@@ -37,7 +38,10 @@ export class ProductsPageComponent implements OnInit {
   strSearchProducts: string = "";
   private subjectSearchProducts = new Subject<string>();
 
-  constructor(private productsService: ProductsService) {
+  constructor(
+    public productsService: ProductsService,
+    public modalService: ModalService
+  ) {
   }
 
   ngOnInit(): void {
@@ -59,7 +63,6 @@ export class ProductsPageComponent implements OnInit {
 
   getProducts(searchText:string , sortProductsAscDesc: boolean): void {
     this.productsService.getProductsApi().subscribe(products => {
-
       this.products = products;
       if (this.valueSelectedPageProducts && this.valueSelectedPageProducts !== 'all') {
         for (let i = this.products.length; i--; ) {

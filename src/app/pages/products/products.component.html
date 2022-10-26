@@ -50,7 +50,7 @@
     </div>
   </div>
   <div class="load-more">
-    <p *ngIf="products.length == 0 "> No Result</p>
+    <p *ngIf="products.length == 0 && loadingProducts == false "> No Result</p>
     <button *ngIf="products.length  > numberShowedProducts"
             class="border load-more-button  py-2 px-4 rounded text-center"
             (click)="numberShowedProducts = numberShowedProducts + numberAddShowedProducts"
@@ -58,4 +58,6 @@
     </button>
   </div>
 </div>
-
+<app-modal *ngIf="modalService.isVisible$ | async" title="Edit Product">
+  <app-form></app-form>
+</app-modal>
