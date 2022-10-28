@@ -13,7 +13,6 @@ export class ProductComponent  {
 
   @Input() product : IProduct;
   detailsProducts = false;
-  idProduct: number | string;
 
   constructor(
     public router: Router,
@@ -21,15 +20,9 @@ export class ProductComponent  {
     public productsService: ProductsService
   ) {
   }
-  showSinglePageProduct(id: number) {
+  showSinglePageProduct(id: number | undefined) {
     this.router.navigate(['product', id]);
-
   }
-  getProductId(id: number | string)  {
-    console.log(this.product)
-    console.log(id)
-   // return  this.idProduct = id
 
-  }
 }
 

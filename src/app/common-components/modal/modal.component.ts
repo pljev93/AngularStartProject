@@ -8,7 +8,7 @@ import {ModalService} from '../../core/services/modal.service'
 })
 export class ModalComponent implements OnInit {
 
-  @Input() title: string
+  @Input() titleForm: string
 
   constructor(public modalService: ModalService) { }
 

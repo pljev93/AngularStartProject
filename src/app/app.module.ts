@@ -23,8 +23,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from "@angular/material/input";
 import {MatSortModule} from "@angular/material/sort";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {FormComponent} from "./common-components/product/form/form.component";
 import {ModalComponent} from "./common-components/modal/modal.component";
+import {FormComponentCreate} from "./common-components/product/form/create/form.component";
+import {FormComponentEdit} from "./common-components/product/form/edit/form.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,8 +36,9 @@ import {ModalComponent} from "./common-components/modal/modal.component";
     ProductComponent,
     P404PageComponent,
     SingleProductComponent,
-    FormComponent,
     ModalComponent,
+    FormComponentCreate,
+    FormComponentEdit,
   ],
   imports: [
     BrowserModule,

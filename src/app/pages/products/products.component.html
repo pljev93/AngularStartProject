@@ -33,15 +33,14 @@
     </div>
   </div>
 
-  <p>{{products.length}}</p>
+  <p>{{productsService.products.length}}</p>
   <p>{{numberShowedProducts}}</p>
   <div *ngIf="loadingProducts"><mat-spinner></mat-spinner></div>
   <div class="product-all">
     <div class="grid-x">
 
       <div  class="cell small-12 large-4"
-            *ngFor="let product of products | slice: 0:numberShowedProducts;  index as i "
-
+            *ngFor="let product of productsService.products | slice: 0:numberShowedProducts;  index as i "
       >
         <div  class="product">
           <app-product @animationProducts [product]="product"></app-product>
@@ -50,14 +49,18 @@
     </div>
   </div>
   <div class="load-more">
-    <p *ngIf="products.length == 0 && loadingProducts == false "> No Result</p>
-    <button *ngIf="products.length  > numberShowedProducts"
+    <p *ngIf="productsService.products.length == 0 && loadingProducts == false "> No Result</p>
+    <button *ngIf="productsService.products.length  > numberShowedProducts"
             class="border load-more-button  py-2 px-4 rounded text-center"
             (click)="numberShowedProducts = numberShowedProducts + numberAddShowedProducts"
     > load More
     </button>
   </div>
 </div>
-<app-modal *ngIf="modalService.isVisible$ | async" title="Edit Product">
-  <app-form></app-form>
+<app-modal *ngIf="modalService.isVisibleEditProduct$ | async" titleForm="Edit Product" >
+  <app-form-edit titleFormButton="Edit"></app-form-edit>
+</app-modal>
+<mat-icon  (click)="modalService.openCreatProduct()"  aria-hidden="false" aria-label="Example home icon" fontIcon="add"></mat-icon>
+<app-modal *ngIf="modalService.isVisibleCreatProduct$ | async" titleForm="Create Product" >
+  <app-form-create titleFormButton="Create"></app-form-create>
 </app-modal>

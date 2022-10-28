@@ -63,35 +63,35 @@ export class ProductsPageComponent implements OnInit {
 
   getProducts(searchText:string , sortProductsAscDesc: boolean): void {
     this.productsService.getProductsApi().subscribe(products => {
-      this.products = products;
+      this.productsService.products = products;
       if (this.valueSelectedPageProducts && this.valueSelectedPageProducts !== 'all') {
-        for (let i = this.products.length; i--; ) {
-          if (  this.products[i].category !== this.valueSelectedPageProducts) {
-            this.products.splice(i, 1);
+        for (let i = this.productsService.products.length; i--; ) {
+          if (  this.productsService.products[i].category !== this.valueSelectedPageProducts) {
+            this.productsService.products.splice(i, 1);
           }
         }
       }
       this.loadingProducts = false;
       this.numberShowedProducts = 3;
       this.sortProductsAscDesc = !this.sortProductsAscDesc;
-      this.products = this.products.slice().sort((a, b) => {
+      this.productsService.products = this.productsService.products.slice().sort((a, b) => {
         return compare(a.title, b.title, sortProductsAscDesc);
       });
 
       if(!searchText){
-        return this.products;
+        return this.productsService.products;
       }
 
       var result: IProduct[] = [];
 
       searchText = searchText.toLowerCase();
 
-      this.products.forEach(function(products) {
+      this.productsService.products.forEach(function(products) {
         if(products.title.toLowerCase().indexOf(searchText) !== -1){
           result.push(products);
         }
       });
-      return this.products = result;
+      return this.productsService.products = result;
 
     })
   }
