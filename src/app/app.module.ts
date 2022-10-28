@@ -14,7 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {ProductComponent} from "./common-components/product/product.component";
 import {HttpClientModule} from "@angular/common/http";
 import {P404PageComponent} from './pages/p404/p404.component';
-import {SingleProductComponent} from './pages/single-product/single-product.component';
+import {SingleProductComponent} from './pages/products/single/product.component';
 import {DirectivesModule} from "./core/directives/directives.module";
 import {PipesModule} from "./core/pipes/pipes.module";
 import {MatSelectModule} from "@angular/material/select";
@@ -26,6 +26,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {ModalComponent} from "./common-components/modal/modal.component";
 import {FormComponentCreate} from "./common-components/product/form/create/form.component";
 import {FormComponentEdit} from "./common-components/product/form/edit/form.component";
+import {TableComponent} from "./pages/products/table/table.component";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +44,7 @@ import {FormComponentEdit} from "./common-components/product/form/edit/form.comp
     ModalComponent,
     FormComponentCreate,
     FormComponentEdit,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +64,10 @@ import {FormComponentEdit} from "./common-components/product/form/edit/form.comp
     FormsModule,
     MatInputModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

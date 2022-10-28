@@ -25,7 +25,7 @@ export class ProductsService {
         )
   }
 
-  getProductDetailsApi(id: number): Observable<IProduct[]> {
+  getProductDetailsApi(id:  number | boolean | undefined): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(`${environment.apiUrl}/products/${id}`)
   }
 
@@ -51,7 +51,6 @@ export class ProductsService {
     let i=0
     for (i; i<this.products.length; i++) {
       if (this.products[i].id == id) {
-        console.log(i)
         this.indexEditProducts = i
       }
     }

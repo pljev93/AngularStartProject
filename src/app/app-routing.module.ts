@@ -4,14 +4,17 @@ import {ProductsPageComponent} from "./pages/products/products.component";
 import {AboutComponent} from "./pages/about/about.component";
 import {HomePageComponent} from "./pages/home/home.component";
 import {P404PageComponent} from "./pages/p404/p404.component";
-import {SingleProductComponent} from "./pages/single-product/single-product.component";
+import {SingleProductComponent} from "./pages/products/single/product.component";
+import {TableComponent} from "./pages/products/table/table.component";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
   {path: 'products', component: ProductsPageComponent},
   {path: 'product/:id', component: SingleProductComponent},
+  {path: 'products/table', component: TableComponent},
   {path: 'about', component: AboutComponent},
   {path: '**', component: P404PageComponent},
+
 ];
 
 @NgModule({

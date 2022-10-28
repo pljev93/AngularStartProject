@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ProductsService} from "../../../../core/services/products.services";
 import {ModalService} from "../../../../core/services/modal.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {IProduct} from "../../../../core/interfaces/product";
 
 @Component({
   selector: 'app-form-edit',
@@ -12,9 +13,12 @@ export class FormComponentEdit implements OnInit {
   @Input() titleFormButton:string
   productEdit: any;
   productId : number | boolean | undefined;
-  constructor(private productsService: ProductsService , private modalService: ModalService) {
+  titleValue:string
+
+  constructor(public productsService: ProductsService , private modalService: ModalService) {
     this.productId = productsService.isProdId$.value
   }
+
   form = new FormGroup({
     title: new FormControl<string>('', [
       Validators.required,
@@ -24,11 +28,21 @@ export class FormComponentEdit implements OnInit {
 
   get title() {
     return this.form.controls.title as FormControl
+
   }
 
   ngOnInit(): void {
-
+    this.getEditProducts()
   }
+  getEditProducts(): void {
+    if (!this.productId) {
+      return
+    }
+    this.productsService.getProductDetailsApi(this.productId).subscribe((data) => {
+      return this.productEdit = data;
+    });
+  }
+
   submit() {
     this.productsService.editProduct({
       title: this.form.value.title as string,

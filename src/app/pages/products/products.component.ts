@@ -51,6 +51,7 @@ export class ProductsPageComponent implements OnInit {
       this.getProducts(searchText, this.sortProductsAscDesc);
     })
     this.loadingProducts = true;
+    console.log(this.products)
   }
 
   sort(sortProductsAscDesc: boolean): void {

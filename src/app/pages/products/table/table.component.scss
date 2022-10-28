@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+.mat-cell, .mat-footer-cell {
+  color: gray;
+}
+.mat-table thead, .mat-table tbody, .mat-table tfoot, mat-header-row, mat-row, mat-footer-row, [mat-header-row], [mat-row], [mat-footer-row], .mat-table-sticky {
+  background: yellowgreen;
+}

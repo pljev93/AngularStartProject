@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ProductsService} from '../../core/services/products.services';
+import {ProductsService} from '../../../core/services/products.services';
 
 
 @Component({
-  selector: 'app-single-product',
-  templateUrl: './single-product.component.html',
-  styleUrls: ['./single-product.component.scss']
+  selector: 'app-single',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss']
 })
 export class SingleProductComponent implements OnInit {
   id: number | null;
@@ -14,11 +14,9 @@ export class SingleProductComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private productsService: ProductsService) {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-
   }
 
   ngOnInit() {
-
     this.getDetails();
   }
 

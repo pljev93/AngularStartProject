@@ -1,12 +1,14 @@
 
 <!--{{productEdit?.title}}-->
 <!--{{productEdit?.id}}-->
+
+
 <form class="edit" [formGroup]="form" (ngSubmit)="submit()">
   <input
     type="text"
     placeholder="Product name"
     formControlName="title"
-
+    value="{{productEdit?.title}}"
 
   >
 
