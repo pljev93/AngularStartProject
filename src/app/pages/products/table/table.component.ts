@@ -1,89 +1,46 @@
-import {HttpClient} from '@angular/common/http';
-import {Component, ViewChild, AfterViewInit} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSort, SortDirection} from '@angular/material/sort';
-import {merge, Observable, of as observableOf} from 'rxjs';
-import {catchError, map, startWith, switchMap} from 'rxjs/operators';
-
+import {MatTableDataSource} from '@angular/material/table';
+import {IProduct} from "../../../core/interfaces/product";
+import {ProductsService} from "../../../core/services/products.services";
+import {ModalService} from "../../../core/services/modal.service";
+import {MatSort} from "@angular/material/sort";
+import {LiveAnnouncer} from "@angular/cdk/a11y";
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['created', 'state', 'number', 'title', 'star'];
-  exampleDatabase: ExampleHttpDatabase | null;
-  data: GithubIssue[] = [];
+export class TableComponent implements AfterViewInit  {
 
-  resultsLength = 0;
-  isLoadingResults = true;
-  isRateLimitReached = false;
+  displayedColumns: string[] = ['id', 'title', 'image' , 'event'];
+  dataSource = new MatTableDataSource<IProduct>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private _httpClient: HttpClient) {}
-
+  constructor(
+    public productsService: ProductsService,
+    public modalService: ModalService,
+    private _liveAnnouncer: LiveAnnouncer
+  ) {
+  }
   ngAfterViewInit() {
-    this.exampleDatabase = new ExampleHttpDatabase(this._httpClient);
-    console.log(this.exampleDatabase)
-    // If the user changes the sort order, reset back to the first page.
-    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
-
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          this.isLoadingResults = true;
-          return this.exampleDatabase!.getRepoIssues(
-            this.sort.active,
-            this.sort.direction,
-            this.paginator.pageIndex,
-          ).pipe(catchError(() => observableOf(null)));
-        }),
-        map(data => {
-          // Flip flag to show that loading has finished.
-          this.isLoadingResults = false;
-          this.isRateLimitReached = data === null;
-
-          if (data === null) {
-            return [];
-          }
-
-          // Only refresh the result length if there is new data. In case of rate
-          // limit errors, we do not want to reset the paginator to zero, as that
-          // would prevent users from re-triggering requests.
-          this.resultsLength = data.total_count;
-          return data.items;
-        }),
-      )
-      .subscribe(data => (this.data = data));
+    this.getProducts()
   }
-}
-
-export interface GithubApi {
-  items: GithubIssue[];
-  total_count: number;
-}
-
-export interface GithubIssue {
-  created_at: string;
-  number: string;
-  state: string;
-  title: string;
-}
-
-/** An example database that the data source uses to retrieve data for the table. */
-export class ExampleHttpDatabase {
-  constructor(private _httpClient: HttpClient) {}
-
-  getRepoIssues(sort: string, order: SortDirection, page: number): Observable<GithubApi> {
-    const href = 'https://api.github.com/search/issues';
-    const requestUrl = `${href}?q=repo:angular/components&sort=${sort}&order=${order}&page=${
-      page + 1
-    }`;
-    return this._httpClient.get<GithubApi>(requestUrl);
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  getProducts(): void {
+    this.productsService.getProductsApi().subscribe(products => {
+      this.dataSource = new MatTableDataSource<IProduct>(products);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
+  }
+
 }
+
+
 

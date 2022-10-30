@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ProductsService} from "../../../../core/services/products.services";
 import {ModalService} from "../../../../core/services/modal.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {IProduct} from "../../../../core/interfaces/product";
 
 @Component({
   selector: 'app-form-edit',
