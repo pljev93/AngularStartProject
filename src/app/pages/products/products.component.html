@@ -60,7 +60,7 @@
 <app-modal *ngIf="modalService.isVisibleEditProduct$ | async" titleForm="Edit Product" >
   <app-form-edit titleFormButton="Edit"></app-form-edit>
 </app-modal>
-<mat-icon  (click)="modalService.openCreatProduct()"  aria-hidden="false" aria-label="Example home icon" fontIcon="add"></mat-icon>
+<mat-icon class="add" (click)="modalService.openCreatProduct()"  aria-hidden="false" aria-label="Example home icon" fontIcon="add"></mat-icon>
 <app-modal *ngIf="modalService.isVisibleCreatProduct$ | async" titleForm="Create Product" >
   <app-form-create titleFormButton="Create"></app-form-create>
 </app-modal>

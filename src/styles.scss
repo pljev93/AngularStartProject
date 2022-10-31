@@ -97,3 +97,25 @@ cursor: pointer;
   transform: translateY(0) !important;
   color: white;
 }
+.add {
+
+  display: inline-block;
+  fill: currentColor;
+  height: 32px!important;
+  width: 32px!important;
+  overflow: hidden;
+  line-height: 32px;
+  text-align: center;
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: greenyellow;
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover  {
+    &:before {
+      color: white!important;
+    }
+
+  }
+}
